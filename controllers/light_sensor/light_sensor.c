@@ -32,64 +32,27 @@
 #define SLOW_ROTATE 0.3
 #define RADIUS 0.045
 
-static double initializer(){
+static void initializer(){
    printf("Starting initialization \n");
    //setting device tags
-   WbDeviceTag ls1, ls0, ls2, left_motor, right_motor;
+   WbDeviceTag ls1, ls0, ls2;
    
    //get handlers for devices
-   left_motor = wb_robot_get_device("left wheel motor");
-   right_motor = wb_robot_get_device("right wheel motor");
    ls0 = wb_robot_get_device("ls0");
    ls1 = wb_robot_get_device("ls1");
    ls2 = wb_robot_get_device("ls2");
-  
-   double left_speed = -FAST_ROTATE;
-   double right_speed = FAST_ROTATE;
-   double max = -1.0;
-   double previous = -1.0;
-   printf("All set! max is: %f\n", max);
-   int found = 0;
-   wb_motor_set_velocity(left_motor, left_speed);
-   wb_motor_set_velocity(right_motor, right_speed);
+  double w = 0.0;
+  double h = 0.0;
+  //sensors can get values only inside loop
    while(wb_robot_step(TIME_STEP) != 1){
-     double reading = wb_light_sensor_get_value(ls1);
-     //printf("reading before round is: %f\n", reading);
-     reading = (int)(reading * 1000 + .5);
-     reading = (float)reading/1000;
-     printf("reading is: %f & max is: %f & previous is: %f\n",reading, max, previous);
-     if(reading == max && found == 1)
-       break;
-     else if(reading > max){
-      // printf("New max!\n");
-       max=reading;
-     }
-     else if (reading < max && reading < previous && found == 0){
-       //printf("Passed max. Rotating.....\n");
-       found = 1;
-       left_speed *= SLOW_ROTATE;
-       right_speed *= -SLOW_ROTATE;
-       wb_motor_set_velocity(left_motor, left_speed);
-       wb_motor_set_velocity(right_motor, right_speed);
-     }
-      else if (reading == previous)
-        printf("compiler is happy\n");
-      else if (reading < previous && found ==1){
-       //printf("Rotating.....\n");
-       left_speed *= -1;
-       right_speed *= -1;
-       wb_motor_set_velocity(left_motor, left_speed);
-       wb_motor_set_velocity(right_motor, right_speed);
-     }
-     previous = reading;
+    const double ls0_value = wb_light_sensor_get_value(ls0);
+    const double ls1_value = wb_light_sensor_get_value(ls1);
+    const double ls2_value = wb_light_sensor_get_value(ls2);
+    w = (-2 * pow(RADIUS,2))/( (2/ls0_value) - (1/ls1_value) - (1/ls2_value));
+    break;
    }
-  wb_motor_set_velocity(left_motor, 0);
-  wb_motor_set_velocity(right_motor, 0);
-  const double ls0_value = wb_light_sensor_get_value(ls0);
-  const double ls1_value = wb_light_sensor_get_value(ls1);
-  const double ls2_value = wb_light_sensor_get_value(ls2);
-  double w = (-2 * pow(RADIUS,2))/( (2/ls0_value) - (1/ls1_value) - (1/ls2_value));
-  return w;
+   
+  
 }
 
 int main() {
@@ -119,14 +82,10 @@ int main() {
   while (wb_robot_step(TIME_STEP) != 1) {
   
     /* read sensor values */
-    const double ls0_value = wb_light_sensor_get_value(ls0);
-    const double ls1_value = wb_light_sensor_get_value(ls1);
-    const double ls2_value = wb_light_sensor_get_value(ls2);
+    //const double ls0_value = wb_light_sensor_get_value(ls0);
+    //const double ls1_value = wb_light_sensor_get_value(ls1);
+    //const double ls2_value = wb_light_sensor_get_value(ls2);
 
-    double w = (-2 * pow(RADIUS,2))/( (2/ls0_value) - (1/ls1_value) - (1/ls2_value));
-    printf("w is: %f\n", w);
-    double Watt = w * 4 * M_PI;
-    printf("Watt are aprox.: %f\n", Watt);
     //double rdistance = sqrt(5/(4*M_PI*ls1_value));
     //double ldistance = sqrt(5/(4*M_PI*ls0_value));
     //printf("Distance from right is: %f\n", rdistance);
