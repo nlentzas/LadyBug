@@ -4,18 +4,18 @@ WorldInfo {
     "Example use of a LightSensor device."
   ]
   title "Light Sensor"
-  basicTimeStep 8
+  basicTimeStep 100
 }
 Viewpoint {
-  orientation 0.9996625944598121 0.02378332498633219 -0.010442733860031446 5.508953796303034
-  position -0.014018360883149561 1.3865685879740317 1.3768428721595278
+  orientation 0.31113721196903554 0.8632103365311571 0.3975695539574204 4.294839266395874
+  position -0.7157767102131978 1.3395430101614632 0.06399558506363806
 }
 TexturedBackground {
 }
 RectangleArena {
 }
 DEF LAMP Solid {
-  translation 0.15 0.39999999999999997 0
+  translation 0.08 0.39999999999999997 0.33999999999999997
   children [
     Shape {
       appearance PBRAppearance {
