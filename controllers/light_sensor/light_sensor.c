@@ -118,9 +118,16 @@ int main() {
   while (wb_robot_step(TIME_STEP) != 1) {
   
     /* read sensor values */
-    //const double ls0_value = wb_light_sensor_get_value(ls0);
-    //const double ls1_value = wb_light_sensor_get_value(ls1);
-    //const double ls2_value = wb_light_sensor_get_value(ls2);
+    const double ls0_value = wb_light_sensor_get_value(ls0);
+    const double ls1_value = wb_light_sensor_get_value(ls1);
+    const double ls2_value = wb_light_sensor_get_value(ls2);
+    
+    double distance_center = sqrt((w/ls0_value) - pow(h,2));
+    printf("Distance from center is: %f\n",distance_center);
+    double distance_sensor = sqrt((w/ls2_value) - pow(h,2));
+    printf("Distance from sensor is: %f\n",distance_sensor);
+    double theta = asin((pow(distance_center,2) + pow(RADIUS,2) - pow(distance_sensor,2))/(distance_center * RADIUS));
+    printf("Angle is: %f\n",theta);
 
     //double rdistance = sqrt(5/(4*M_PI*ls1_value));
     //double ldistance = sqrt(5/(4*M_PI*ls0_value));
