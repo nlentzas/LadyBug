@@ -86,6 +86,8 @@ static void initializer(double* w, double* h){
   
 }
 
+
+
 int main() {
   WbDeviceTag ls0, ls1, ls2, left_motor, right_motor;
 
@@ -122,12 +124,30 @@ int main() {
     const double ls1_value = wb_light_sensor_get_value(ls1);
     const double ls2_value = wb_light_sensor_get_value(ls2);
     
+    /* calculate distance between projection of light and center / left sensors */
     double distance_center = sqrt((w/ls0_value) - pow(h,2));
-    printf("Distance from center is: %f\n",distance_center);
     double distance_sensor = sqrt((w/ls2_value) - pow(h,2));
-    printf("Distance from sensor is: %f\n",distance_sensor);
-    double theta = asin((pow(distance_center,2) + pow(RADIUS,2) - pow(distance_sensor,2))/(distance_center * RADIUS));
+    
+    /* round the values for comparison */
+    double round_center = (int)(distance_center * 1000);
+    round_center = (float)round_center/1000;
+    double round_left = (int)(distance_sensor * 1000);
+    round_left = (float)round_left/1000;
+    double theta = 0.0;
+    printf("Distance from sensor is: %f\n",round_left);
+    printf("Distance from center is: %f\n",round_center);
+    double diff = round_center - round_left;
+    printf("Diff is : %f\n", diff);
+    printf("Radius is : %f\n", RADIUS);
+    if(diff == RADIUS)
+       theta = asin(1);
+    else if (round_center - round_left == RADIUS)
+       theta = asin(-1);
+    else
+       theta = asin((pow(distance_center,2) + pow(RADIUS,2) - pow(distance_sensor,2))/(distance_center * RADIUS));
     printf("Angle is: %f\n",theta);
+    theta = theta * (180 / M_PI);
+    printf("Angle is: %f degrees\n",theta);
 
     //double rdistance = sqrt(5/(4*M_PI*ls1_value));
     //double ldistance = sqrt(5/(4*M_PI*ls0_value));

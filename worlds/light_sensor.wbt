@@ -15,7 +15,7 @@ TexturedBackground {
 RectangleArena {
 }
 DEF LAMP Solid {
-  translation 0.08 0.39999999999999997 0.33999999999999997
+  translation 0.29 0.39999999999999997 0.33999999999999997
   children [
     Shape {
       appearance PBRAppearance {
