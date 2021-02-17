@@ -6,7 +6,7 @@ LadyBug was based on the key idea of I-Bug [[1]](#1). In  order  to  evaluate  t
 
 ## Usage
 
-In order to use the provided code, Webots is needed [[2]](#2). A demo world is provided +plain.wbt+ and the controller implementing both algorithms +bug.c+. 
+In order to use the provided code, Webots is needed [[2]](#2). You can download webots from https://cyberbotics.com/ A demo world is provided (```plain.wbt```) as well as the controller implementing both algorithms (```bug.c```). 
 
 
 ## Citation
