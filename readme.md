@@ -8,10 +8,6 @@ LadyBug was based on the key idea of I-Bug [[1]](#1). In  order  to  evaluate  t
 
 In order to use the provided code, Webots is needed [[2]](#2). A demo world is provided +plain.wbt+ and the controller implementing both algorithms +bug.c+. 
 
-```bash
-pip install foobar
-```
-
 
 ## Citation
 A. Lentzas and D. Vrakas, "LadyBug. An Intensity based Localization Bug Algorithm," 2020 25th IEEE International Conference on Emerging Technologies and Factory Automation (ETFA), Vienna, Austria, 2020, pp. 682-689, doi: 10.1109/ETFA46521.2020.9212115.
