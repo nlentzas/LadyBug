@@ -1,12 +1,12 @@
 # LadyBug
 
-LadyBug is a bug algorithm based on Received Signal Strength Indication (RSSI). It has two distinct parts. The first part is localization, where the position of the beacon in the robot-centric coordinates system are calculated. The second part is navigation. where the robot navigates to the beacon while avoiding obstacles found on it's way. 
+Localization and navigation is a crucial task of autonomous robots. LadyBug is a novel bug algorithm using the Received Signal Strength Indication (RSSI) of an electromagnetic signal. The algorithm is able to accurately calculate the position of the beacon emitting the aforementioned signal. Experiments were performed with a simulated robot equipped only with local sensors. 
 
 LadyBug was based on the key idea of I-Bug [[1]](#1). In  order  to  evaluate  the  performance  of  the LadyBug algorithm  and  provide  an  empirical  comparison  against  the I-Bug algorithm, we implemented both algorithms.
 
 ## Usage
 
-In order to use the provided code, Webots is needed [[2]](#2). You can download webots from https://cyberbotics.com/ A demo world is provided (```plain.wbt```) as well as the controller implementing both algorithms (```bug.c```). 
+In order to use the provided code, Webots is needed [[2]](#2). You can download webots from https://cyberbotics.com/. A demo world is provided (```plain.wbt```) as well as the controller implementing both algorithms (```bug.c```). 
 
 
 ## Citation
